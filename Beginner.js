@@ -19,3 +19,12 @@ const largestNumberOfArray = (array) => {
 };
 
 console.log(largestNumberOfArray([2, 5, 767, 432, 2455]));
+
+// Print numbers from 1 to 100. If a number is divisible by 3, print "Fizz"; if it's divisible by 5, print "Buzz"; if it's divisible by both, print "FizzBuzz".
+
+for (let i = 1; i <= 100; i++) {
+  let output = "";
+  if (i % 3 === 0) output += "Fizz";
+  if (i % 5 === 0) output += "Buzz";
+  console.log(output || i);
+}
