@@ -28,3 +28,11 @@ for (let i = 1; i <= 100; i++) {
   if (i % 5 === 0) output += "Buzz";
   console.log(output || i);
 }
+
+// Write a function that checks whether a given number is even or odd.
+
+function isEvenOrOdd(num) {
+  return num % 2 === 0 ? "Even" : "Odd";
+}
+
+console.log(isEvenOrOdd(7)); // Output: "Odd"
