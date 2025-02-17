@@ -35,4 +35,18 @@ function isEvenOrOdd(num) {
   return num % 2 === 0 ? "Even" : "Odd";
 }
 
-console.log(isEvenOrOdd(7)); // Output: "Odd"
+console.log(isEvenOrOdd(7));
+
+// Write a function that returns the larger of two numbers.
+
+const maxNumber = (a, b) => {
+  return a > b ? a : b;
+};
+console.log(maxNumber(10, 20));
+
+// Write a function that calculates the factorial of a number.
+function factorial(n) {
+  if (n === 0) return 1;
+  return n * factorial(n - 1);
+}
+console.log(factorial(5)); // Output: 120
