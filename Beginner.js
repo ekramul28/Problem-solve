@@ -65,3 +65,10 @@ function removeDuplicates(arr) {
   return [...new Set(arr)];
 }
 console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+
+// Write a function that returns the largest number in an array.
+
+function findLargest(arr) {
+  return Math.max(...arr);
+}
+console.log(findLargest([3, 7, 2, 8, 10]));
