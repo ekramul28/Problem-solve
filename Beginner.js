@@ -51,3 +51,10 @@ const factorial = (n) => {
   return n * factorial(n - 1);
 };
 console.log(factorial(5)); // Output: 120
+
+// Write a function that counts the number of vowels in a given string.
+
+function countVowels(str) {
+  return str.match(/[aeiou]/gi)?.length || 0;
+}
+console.log(countVowels("hello world"));
