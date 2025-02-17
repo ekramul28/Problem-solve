@@ -45,8 +45,9 @@ const maxNumber = (a, b) => {
 console.log(maxNumber(10, 20));
 
 // Write a function that calculates the factorial of a number.
-function factorial(n) {
+
+const factorial = (n) => {
   if (n === 0) return 1;
   return n * factorial(n - 1);
-}
+};
 console.log(factorial(5)); // Output: 120
