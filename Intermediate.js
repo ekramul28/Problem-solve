@@ -17,8 +17,17 @@ const longestUniqueSubstring = (str) => {
 
 console.log(longestUniqueSubstring("abcabcsflfdkssdnskjdsdjsdsdjsnfsdklcbb"));
 
-const sorter = (str) => {
-  const value = new Set([...str]);
-  return value.size;
-};
-console.log(sorter("abcabcsflfdkssdnskjdsdjsdsdjsnfsdklcbb"));
+// Two Sum (Pair with Given Sum)
+
+function twoSum(nums, target) {
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let complement = target - nums[i];
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    map.set(nums[i], i);
+  }
+  return [];
+}
+console.log(twoSum([2, 7, 11, 15], 9));
