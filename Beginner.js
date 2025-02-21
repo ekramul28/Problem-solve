@@ -1,3 +1,10 @@
+// Celsius to Fahrenheit conversion
+
+const celsiusToFahrenheit = (celsius) => {
+  return (celsius * 9) / 5 + 32;
+};
+console.log(celsiusToFahrenheit(25));
+
 // Write a function that takes a string and returns the reversed version.
 
 const reverseString = (str) => {
