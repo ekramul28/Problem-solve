@@ -101,3 +101,40 @@ console.log(nums4); // Output: [1,2,3]
 let nums5 = [1, 1, 5];
 nextPermutation(nums5);
 console.log(nums5); // Output: [1,5,1]
+
+// PW2.01.07 Integer to Roman
+
+function intToRoman(num) {
+  const values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  const symbols = [
+    "M",
+    "CM",
+    "D",
+    "CD",
+    "C",
+    "XC",
+    "L",
+    "XL",
+    "X",
+    "IX",
+    "V",
+    "IV",
+    "I",
+  ];
+
+  let result = "";
+
+  for (let i = 0; i < values.length; i++) {
+    while (num >= values[i]) {
+      num -= values[i];
+      result += symbols[i];
+    }
+  }
+
+  return result;
+}
+
+// Test cases
+console.log(intToRoman(3));
+console.log(intToRoman(58));
+console.log(intToRoman(1994));
