@@ -17,6 +17,12 @@ const isLeapYear = (year) => {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 };
 
+// Check positive, negative, or zero
+
+const checkNumber = (num) =>
+  num > 0 ? "Positive" : num < 0 ? "Negative" : "Zero";
+console.log(checkNumber(-5));
+
 // Write a function that takes a string and returns the reversed version.
 
 const reverseString = (str) => {
