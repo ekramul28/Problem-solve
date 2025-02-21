@@ -5,6 +5,18 @@ const celsiusToFahrenheit = (celsius) => {
 };
 console.log(celsiusToFahrenheit(25));
 
+// Check even or odd
+
+const CheckEventOrOdd = (num) => {
+  return num % 2 === 0 ? "Even" : "odd";
+};
+
+// Check leap year
+
+const isLeapYear = (year) => {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+};
+
 // Write a function that takes a string and returns the reversed version.
 
 const reverseString = (str) => {
