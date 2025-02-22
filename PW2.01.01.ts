@@ -181,3 +181,25 @@ function longestCommonPrefix(strs) {
 // Test cases
 console.log(longestCommonPrefix(["flower", "flow", "flight"]));
 console.log(longestCommonPrefix(["dog", "racecar", "car"]));
+
+// PW2.01.10 Valid Parentheses
+
+function isValid(s) {
+  const stack = [];
+  const map = { ")": "(", "}": "{", "]": "[" };
+
+  for (let char of s) {
+    if (map[char]) {
+      if (stack.pop() !== map[char]) return false;
+    } else {
+      stack.push(char);
+    }
+  }
+
+  return stack.length === 0;
+}
+
+// Test cases
+console.log(isValid("()")); // Output: true
+console.log(isValid("()[]{}")); // Output: true
+console.log(isValid("(]")); // Output: false
