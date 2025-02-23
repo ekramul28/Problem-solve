@@ -31,3 +31,16 @@ function twoSum(nums, target) {
   return [];
 }
 console.log(twoSum([2, 7, 11, 15], 9));
+
+// Find the Second Largest Number in an Array
+
+function secondLargest(arr) {
+  let uniqueArr = [...new Set(arr)];
+  if (uniqueArr.length < 2) return null;
+
+  uniqueArr.sort((a, b) => b - a);
+  return uniqueArr[1];
+}
+
+// Example usage:
+console.log(secondLargest([10, 20, 4, 45, 99, 99])); // Output: 45
