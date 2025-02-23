@@ -44,3 +44,16 @@ function secondLargest(arr) {
 
 // Example usage:
 console.log(secondLargest([10, 20, 4, 45, 99, 99])); // Output: 45
+
+// Find the Missing Number in an Array
+
+function findMissingNumber(arr) {
+  let n = arr.length;
+  let expectedSum = (n * (n + 1)) / 2;
+  let actualSum = arr.reduce((sum, num) => sum + num, 0);
+  return expectedSum - actualSum;
+}
+
+// Example usage:
+console.log(findMissingNumber([3, 0, 1])); // Output: 2
+console.log(findMissingNumber([0, 1, 2, 4, 5, 6])); // Output: 3
