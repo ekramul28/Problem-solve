@@ -57,3 +57,21 @@ function findMissingNumber(arr) {
 // Example usage:
 console.log(findMissingNumber([3, 0, 1])); // Output: 2
 console.log(findMissingNumber([0, 1, 2, 4, 5, 6])); // Output: 3
+
+// Find the Longest Word in a Sentence
+
+function longestWord(sentence) {
+  let words = sentence.split(" ");
+  let longest = "";
+
+  for (let word of words) {
+    if (word.length > longest.length) {
+      longest = word;
+    }
+  }
+
+  return longest;
+}
+
+console.log(longestWord("The quick brown fox jumped over the lazy dog"));
+// Output: "jumped"
