@@ -36,3 +36,22 @@ function numIdenticalPairs(nums: number[]): number {
 console.log(numIdenticalPairs([1, 2, 3, 1, 1, 3])); // Output: 4
 console.log(numIdenticalPairs([1, 1, 1, 1])); // Output: 6
 console.log(numIdenticalPairs([1, 2, 3])); // Output: 0
+
+// Final Value of Variable After Performing Operations
+
+function finalValueAfterOperations(operations: string[]): number {
+  let x = 0;
+  for (let op of operations) {
+    if (op.includes("++")) {
+      x++;
+    } else {
+      x--;
+    }
+  }
+  return x;
+}
+
+// Example usage:
+console.log(finalValueAfterOperations(["--X", "X++", "X++"])); // Output: 1
+console.log(finalValueAfterOperations(["++X", "++X", "X++"])); // Output: 3
+console.log(finalValueAfterOperations(["X++", "++X", "--X", "X--"])); // Output: 0
