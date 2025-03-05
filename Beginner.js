@@ -103,3 +103,10 @@ function sleep(ms) {
 }
 
 sleep(2000).then(() => console.log("Waited for 2 seconds"));
+
+function findPairs(arr, target) {
+  // Your code here
+}
+
+console.log(findPairs([2, 4, 3, 5, 7, 8, 1], 6));
+// Output: [[2,4], [3,3], [5,1]]
