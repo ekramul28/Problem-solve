@@ -125,3 +125,26 @@ console.log(canFormPalindrome("civic")); // true
 console.log(canFormPalindrome("ivicc")); // true
 console.log(canFormPalindrome("hello")); // false
 console.log(canFormPalindrome("aabbcc")); // true
+
+// Custom Hook - useDebounce
+
+import { useState, useEffect } from "react";
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage Example:
+const debouncedSearch = useDebounce(searchTerm, 500);
