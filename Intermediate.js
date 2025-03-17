@@ -100,3 +100,28 @@ function findMissingNumber(arr) {
 
 console.log(findMissingNumber([1, 2, 4, 5, 6]));
 // Output: 3
+
+// Palindrome Rearrangement
+
+function canFormPalindrome(s) {
+  const freq = {};
+
+  for (let char of s) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+
+  let oddCount = 0;
+  for (let count of Object.values(freq)) {
+    if (count % 2 !== 0) {
+      oddCount++;
+    }
+    if (oddCount > 1) return false;
+  }
+
+  return true;
+}
+
+console.log(canFormPalindrome("civic")); // true
+console.log(canFormPalindrome("ivicc")); // true
+console.log(canFormPalindrome("hello")); // false
+console.log(canFormPalindrome("aabbcc")); // true
