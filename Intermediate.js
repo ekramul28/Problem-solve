@@ -148,3 +148,24 @@ function useDebounce(value, delay) {
 
 // Usage Example:
 const debouncedSearch = useDebounce(searchTerm, 500);
+
+
+// Group Objects by Property
+
+function groupBy(array, property) {
+  return array.reduce((acc, obj) => {
+    let key = obj[property];
+    acc[key] = acc[key] || [];
+    acc[key].push(obj);
+    return acc;
+  }, {});
+}
+
+const data = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 25 },
+  { name: "David", age: 30 }
+];
+
+console.log(groupBy(data, "age"));
