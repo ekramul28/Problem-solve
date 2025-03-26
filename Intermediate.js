@@ -149,7 +149,6 @@ function useDebounce(value, delay) {
 // Usage Example:
 const debouncedSearch = useDebounce(searchTerm, 500);
 
-
 // Group Objects by Property
 
 function groupBy(array, property) {
@@ -165,7 +164,42 @@ const data = [
   { name: "Alice", age: 25 },
   { name: "Bob", age: 30 },
   { name: "Charlie", age: 25 },
-  { name: "David", age: 30 }
+  { name: "David", age: 30 },
 ];
 
 console.log(groupBy(data, "age"));
+
+// Custom Event Emitter
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+
+  on(event, listener) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(listener);
+  }
+
+  off(event, listenerToRemove) {
+    if (!this.events[event]) return;
+    this.events[event] = this.events[event].filter(
+      (listener) => listener !== listenerToRemove
+    );
+  }
+
+  emit(event, ...args) {
+    if (!this.events[event]) return;
+    this.events[event].forEach((listener) => listener(...args));
+  }
+}
+
+const emitter = new EventEmitter();
+const greet = (name) => console.log(`Hello, ${name}!`);
+
+emitter.on("sayHello", greet);
+emitter.emit("sayHello", "Alice"); // Hello, Alice!
+
+emitter.off("sayHello", greet);
+emitter.emit("sayHello", "Bob"); // No output
