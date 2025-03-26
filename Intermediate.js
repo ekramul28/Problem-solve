@@ -203,3 +203,23 @@ emitter.emit("sayHello", "Alice"); // Hello, Alice!
 
 emitter.off("sayHello", greet);
 emitter.emit("sayHello", "Bob"); // No output
+
+// Promisify a Callback-Based Function
+
+function promisify(fn) {
+  return function (...args) {
+    return new Promise((resolve, reject) => {
+      fn(...args, (err, data) => {
+        if (err) reject(err);
+        else resolve(data);
+      });
+    });
+  };
+}
+
+function asyncOperation(callback) {
+  setTimeout(() => callback(null, "Success!"), 1000);
+}
+
+const promisedFunction = promisify(asyncOperation);
+promisedFunction().then(console.log); // Logs "Success!" after 1 second
