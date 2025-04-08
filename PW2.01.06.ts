@@ -55,3 +55,29 @@ function finalValueAfterOperations(operations: string[]): number {
 console.log(finalValueAfterOperations(["--X", "X++", "X++"])); // Output: 1
 console.log(finalValueAfterOperations(["++X", "++X", "X++"])); // Output: 3
 console.log(finalValueAfterOperations(["X++", "++X", "--X", "X--"])); // Output: 0
+
+
+// Deep Clone with Cyclic Reference
+
+function deepClone(obj, map = new WeakMap()) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (map.has(obj)) return map.get(obj);
+
+  const clone = Array.isArray(obj) ? [] : {};
+  map.set(obj, clone);
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      clone[key] = deepClone(obj[key], map);
+    }
+  }
+  return clone;
+}
+
+// Test
+const a = { val: 1 };
+a.self = a;
+
+const b = deepClone(a);
+console.log(b);          // { val: 1, self: [Circular] }
+console.log(b.self === b); // true
