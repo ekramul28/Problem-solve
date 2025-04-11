@@ -110,3 +110,8 @@ function findPairs(arr, target) {
 
 console.log(findPairs([2, 4, 3, 5, 7, 8, 1], 6));
 // Output: [[2,4], [3,3], [5,1]]
+
+function sumArray(arr) {
+  return arr.reduce((total, num) => total + num, 0);
+}
+console.log(sumArray([1, 2, 3, 4])); // 10
