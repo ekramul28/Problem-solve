@@ -136,3 +136,27 @@ function maxSubArray(nums: number[]): number {
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Output: 6 (subarray [4,-1,2,1])
 console.log(maxSubArray([1])); // Output: 1
 console.log(maxSubArray([-1, -2, -3, -4])); // Output: -1 (single element)
+
+// First Non-Repeating Character
+function firstUniqChar(s: string): number {
+  const charCount = new Map<string, number>();
+
+  // Count frequency of each character
+  for (const char of s) {
+    charCount.set(char, (charCount.get(char) || 0) + 1);
+  }
+
+  // Find first character with frequency 1
+  for (let i = 0; i < s.length; i++) {
+    if (charCount.get(s[i]) === 1) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+// Example usage:
+console.log(firstUniqChar("leetcode")); // Output: 0 (l is the first non-repeating character)
+console.log(firstUniqChar("loveleetcode")); // Output: 2 (v is the first non-repeating character)
+console.log(firstUniqChar("aabb")); // Output: -1 (no non-repeating character exists)
