@@ -255,3 +255,47 @@ setTimeout(throttledOperation, 1100); // Executes after 1.1 seconds
 //     console.log('Window resized');
 // }, 250);
 // window.addEventListener('resize', throttledWindowResize);
+
+// Implement Memoization Function
+function memoize(fn) {
+  const cache = new Map();
+
+  return function (...args) {
+    // Create a unique key from the arguments
+    const key = JSON.stringify(args);
+
+    if (cache.has(key)) {
+      console.log("Fetching from cache...");
+      return cache.get(key);
+    }
+
+    console.log("Calculating result...");
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+// Example usage with expensive calculation:
+function fibonacci(n) {
+  if (n < 2) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const memoizedFibonacci = memoize(fibonacci);
+
+// First call will calculate
+console.log(memoizedFibonacci(10)); // Calculating result... 55
+
+// Second call with same argument will use cached result
+console.log(memoizedFibonacci(10)); // Fetching from cache... 55
+
+// Example with multiple arguments
+const memoizedSum = memoize((a, b, c) => {
+  console.log("Performing expensive calculation...");
+  return a + b + c;
+});
+
+console.log(memoizedSum(1, 2, 3)); // Performing expensive calculation... 6
+console.log(memoizedSum(1, 2, 3)); // Fetching from cache... 6
+console.log(memoizedSum(2, 2, 3)); // Performing expensive calculation... 7
