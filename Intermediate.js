@@ -223,3 +223,35 @@ function asyncOperation(callback) {
 
 const promisedFunction = promisify(asyncOperation);
 promisedFunction().then(console.log); // Logs "Success!" after 1 second
+
+// Implement Throttle Function
+function throttle(func, limit) {
+  let inThrottle;
+  return function (...args) {
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit);
+    }
+  };
+}
+
+// Example usage:
+const expensiveOperation = () =>
+  console.log("Expensive operation executed at:", Date.now());
+const throttledOperation = throttle(expensiveOperation, 1000);
+
+// These calls will be throttled to execute at most once per second
+throttledOperation(); // Executes immediately
+throttledOperation(); // Ignored
+throttledOperation(); // Ignored
+setTimeout(throttledOperation, 1100); // Executes after 1.1 seconds
+
+// Real-world example:
+// const throttledWindowResize = throttle(() => {
+//     console.log('Window resized');
+// }, 250);
+// window.addEventListener('resize', throttledWindowResize);
