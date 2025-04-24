@@ -299,3 +299,93 @@ const memoizedSum = memoize((a, b, c) => {
 console.log(memoizedSum(1, 2, 3)); // Performing expensive calculation... 6
 console.log(memoizedSum(1, 2, 3)); // Fetching from cache... 6
 console.log(memoizedSum(2, 2, 3)); // Performing expensive calculation... 7
+
+// Deep Object Comparison
+function isDeepEqual(obj1, obj2) {
+  // Handle primitive types and null
+  if (obj1 === obj2) return true;
+  if (obj1 === null || obj2 === null) return false;
+  if (typeof obj1 !== "object" || typeof obj2 !== "object") return false;
+
+  // Handle arrays
+  if (Array.isArray(obj1) && Array.isArray(obj2)) {
+    if (obj1.length !== obj2.length) return false;
+    return obj1.every((item, index) => isDeepEqual(item, obj2[index]));
+  }
+
+  // Handle objects
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) return false;
+
+  return keys1.every((key) => {
+    return keys2.includes(key) && isDeepEqual(obj1[key], obj2[key]);
+  });
+}
+
+// Example usage:
+const obj1 = {
+  a: 1,
+  b: { c: 2, d: [3, 4, { e: 5 }] },
+  f: [6, 7],
+};
+
+const obj2 = {
+  a: 1,
+  b: { c: 2, d: [3, 4, { e: 5 }] },
+  f: [6, 7],
+};
+
+const obj3 = {
+  a: 1,
+  b: { c: 2, d: [3, 4, { e: 6 }] }, // different value
+  f: [6, 7],
+};
+
+console.log(isDeepEqual(obj1, obj2)); // true
+console.log(isDeepEqual(obj1, obj3)); // false
+console.log(isDeepEqual([1, [2, 3]], [1, [2, 3]])); // true
+console.log(isDeepEqual([1, [2, 3]], [1, [2, 4]])); // false
+
+// Curry Function Implementation
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    }
+
+    return function (...moreArgs) {
+      return curried.apply(this, args.concat(moreArgs));
+    };
+  };
+}
+
+// Example usage:
+function add(a, b, c) {
+  return a + b + c;
+}
+
+const curriedAdd = curry(add);
+
+// Different ways to call the curried function
+console.log(curriedAdd(1)(2)(3)); // 6
+console.log(curriedAdd(1, 2)(3)); // 6
+console.log(curriedAdd(1)(2, 3)); // 6
+console.log(curriedAdd(1, 2, 3)); // 6
+
+// More practical example
+function formatMessage(type, timestamp, message) {
+  return `[${type}] ${timestamp}: ${message}`;
+}
+
+const curriedFormat = curry(formatMessage);
+const logError = curriedFormat("ERROR");
+const logErrorNow = logError(new Date().toISOString());
+
+console.log(logErrorNow("Something went wrong!"));
+// Output: [ERROR] 2024-03-21T10:30:00.000Z: Something went wrong!
+
+const logDebug = curriedFormat("DEBUG");
+console.log(logDebug(new Date().toISOString())("Debug message"));
+// Output: [DEBUG] 2024-03-21T10:30:00.000Z: Debug message
