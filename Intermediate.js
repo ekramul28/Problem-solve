@@ -389,3 +389,86 @@ console.log(logErrorNow("Something went wrong!"));
 const logDebug = curriedFormat("DEBUG");
 console.log(logDebug(new Date().toISOString())("Debug message"));
 // Output: [DEBUG] 2024-03-21T10:30:00.000Z: Debug message
+
+// Implement Promise.all Polyfill
+function promiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    if (!Array.isArray(promises)) {
+      reject(new TypeError("Argument must be an array"));
+      return;
+    }
+
+    const results = [];
+    let completed = 0;
+
+    if (promises.length === 0) {
+      resolve(results);
+      return;
+    }
+
+    promises.forEach((promise, index) => {
+      Promise.resolve(promise)
+        .then((result) => {
+          results[index] = result;
+          completed++;
+
+          if (completed === promises.length) {
+            resolve(results);
+          }
+        })
+        .catch(reject);
+    });
+  });
+}
+
+// Example usage:
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve) =>
+  setTimeout(() => resolve("foo"), 2000)
+);
+const promise3 = Promise.resolve(42);
+
+promiseAll([promise1, promise2, promise3])
+  .then((results) => console.log("All promises resolved:", results))
+  .catch((error) => console.error("One promise rejected:", error));
+
+// Test with rejection
+const failingPromise = Promise.reject("Error!");
+promiseAll([promise1, failingPromise, promise3])
+  .then((results) => console.log("Success:", results))
+  .catch((error) => console.log("Caught error:", error));
+
+// Flatten Nested Arrays
+function flattenArray(arr, depth = Infinity) {
+  if (depth === 0) return arr;
+
+  return arr.reduce((flat, item) => {
+    if (Array.isArray(item) && depth > 0) {
+      return flat.concat(flattenArray(item, depth - 1));
+    } else {
+      return flat.concat(item);
+    }
+  }, []);
+}
+
+// Example usage:
+const nestedArray = [1, [2, 3], [4, [5, 6]], [7, 8, [9, 10, [11, 12]]]];
+
+console.log("Original array:", nestedArray);
+console.log("Fully flattened:", flattenArray(nestedArray));
+// Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+console.log("Flattened with depth 1:", flattenArray(nestedArray, 1));
+// Output: [1, 2, 3, 4, [5, 6], 7, 8, [9, 10, [11, 12]]]
+
+console.log("Flattened with depth 2:", flattenArray(nestedArray, 2));
+// Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, [11, 12]]
+
+// More examples
+const mixedArray = [1, "hello", [2, 3, [4, 5]], { key: "value" }, [6, [7, 8]]];
+console.log("Mixed array flattened:", flattenArray(mixedArray));
+// Output: [1, 'hello', 2, 3, 4, 5, { key: 'value' }, 6, 7, 8]
+
+// Test with empty arrays
+console.log("Empty array:", flattenArray([])); // []
+console.log("Nested empty arrays:", flattenArray([[], [1, 2], []])); // [1, 2]
