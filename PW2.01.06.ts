@@ -160,3 +160,45 @@ function firstUniqChar(s: string): number {
 console.log(firstUniqChar("leetcode")); // Output: 0 (l is the first non-repeating character)
 console.log(firstUniqChar("loveleetcode")); // Output: 2 (v is the first non-repeating character)
 console.log(firstUniqChar("aabb")); // Output: -1 (no non-repeating character exists)
+
+// Longest Palindromic Substring
+function longestPalindrome(s: string): string {
+  if (s.length < 2) return s;
+
+  let start = 0;
+  let maxLength = 1;
+
+  // Expand around center for both odd and even length palindromes
+  for (let i = 0; i < s.length; i++) {
+    // Check for odd length palindromes
+    let len1 = expandAroundCenter(s, i, i);
+    // Check for even length palindromes
+    let len2 = expandAroundCenter(s, i, i + 1);
+
+    let maxLen = Math.max(len1, len2);
+
+    if (maxLen > maxLength) {
+      start = i - Math.floor((maxLen - 1) / 2);
+      maxLength = maxLen;
+    }
+  }
+
+  return s.substring(start, start + maxLength);
+}
+
+function expandAroundCenter(s: string, left: number, right: number): number {
+  while (left >= 0 && right < s.length && s[left] === s[right]) {
+    left--;
+    right++;
+  }
+  return right - left - 1;
+}
+
+// Example usage:
+console.log(longestPalindrome("babad")); // Output: "bab" or "aba"
+console.log(longestPalindrome("cbbd")); // Output: "bb"
+console.log(longestPalindrome("a")); // Output: "a"
+console.log(longestPalindrome("ac")); // Output: "a"
+console.log(longestPalindrome("racecar")); // Output: "racecar"
+console.log(longestPalindrome("abba")); // Output: "abba"
+console.log(longestPalindrome("")); // Output: ""
