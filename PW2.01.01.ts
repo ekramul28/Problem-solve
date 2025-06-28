@@ -255,3 +255,53 @@ console.log(lengthOfLongestSubstring("pwwkew")); // Output: 3 (substring "wke")
 console.log(lengthOfLongestSubstring("")); // Output: 0
 console.log(lengthOfLongestSubstring("abcdef")); // Output: 6 (substring "abcdef")
 console.log(lengthOfLongestSubstring("aab")); // Output: 2 (substring "ab")
+
+// Median of Two Sorted Arrays
+function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
+  // Ensure nums1 is the smaller array
+  if (nums1.length > nums2.length) {
+    [nums1, nums2] = [nums2, nums1];
+  }
+
+  const m = nums1.length;
+  const n = nums2.length;
+  const left = Math.floor((m + n + 1) / 2);
+
+  let low = 0;
+  let high = m;
+
+  while (low <= high) {
+    const partitionX = Math.floor((low + high) / 2);
+    const partitionY = left - partitionX;
+
+    const maxLeftX = partitionX === 0 ? -Infinity : nums1[partitionX - 1];
+    const minRightX = partitionX === m ? Infinity : nums1[partitionX];
+    const maxLeftY = partitionY === 0 ? -Infinity : nums2[partitionY - 1];
+    const minRightY = partitionY === n ? Infinity : nums2[partitionY];
+
+    if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+      // Found the correct partition
+      if ((m + n) % 2 === 0) {
+        return (
+          (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2
+        );
+      } else {
+        return Math.max(maxLeftX, maxLeftY);
+      }
+    } else if (maxLeftX > minRightY) {
+      high = partitionX - 1;
+    } else {
+      low = partitionX + 1;
+    }
+  }
+
+  throw new Error("Input arrays are not sorted");
+}
+
+// Example usage:
+console.log(findMedianSortedArrays([1, 3], [2])); // Output: 2.0
+console.log(findMedianSortedArrays([1, 2], [3, 4])); // Output: 2.5
+console.log(findMedianSortedArrays([0, 0], [0, 0])); // Output: 0.0
+console.log(findMedianSortedArrays([], [1])); // Output: 1.0
+console.log(findMedianSortedArrays([2], [])); // Output: 2.0
+console.log(findMedianSortedArrays([1, 3, 5, 7], [2, 4, 6, 8])); // Output: 4.5
