@@ -229,3 +229,29 @@ function nextPermutation2(nums: number[]): void {
     right--;
   }
 }
+
+// Longest Substring Without Repeating Characters
+function lengthOfLongestSubstring(s: string): number {
+  const charSet = new Set<string>();
+  let left = 0;
+  let maxLength = 0;
+
+  for (let right = 0; right < s.length; right++) {
+    while (charSet.has(s[right])) {
+      charSet.delete(s[left]);
+      left++;
+    }
+    charSet.add(s[right]);
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+
+  return maxLength;
+}
+
+// Example usage:
+console.log(lengthOfLongestSubstring("abcabcbb")); // Output: 3 (substring "abc")
+console.log(lengthOfLongestSubstring("bbbbb")); // Output: 1 (substring "b")
+console.log(lengthOfLongestSubstring("pwwkew")); // Output: 3 (substring "wke")
+console.log(lengthOfLongestSubstring("")); // Output: 0
+console.log(lengthOfLongestSubstring("abcdef")); // Output: 6 (substring "abcdef")
+console.log(lengthOfLongestSubstring("aab")); // Output: 2 (substring "ab")
