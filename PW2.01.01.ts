@@ -17,6 +17,7 @@ console.log(twoSum([3, 2, 4], 6));
 console.log(twoSum([3, 3], 6));
 
 // removeDuplicates
+//this is the last this
 function removeDuplicates(nums: number[]): number {
   if (nums.length === 0) return 0;
   let k = 1;
