@@ -18,3 +18,5 @@ const getMaleNames = (people) =>
     .filter((person) => person.gender === "male")
     .map((person) => person.name);
 console.log("Male Names:", getMaleNames(people));
+// 8. Task: Calculate Total Value
+//all mpProblem here
