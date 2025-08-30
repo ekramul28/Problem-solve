@@ -203,3 +203,5 @@ console.log(longestPalindrome("racecar")); // Output: "racecar"
 console.log(longestPalindrome("abba")); // Output: "abba"
 console.log(longestPalindrome("")); // Output: ""
 console.log(longestPalindrome("")); // Output: ""
+
+//having some code in added some code in ui also
