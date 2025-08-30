@@ -472,3 +472,5 @@ console.log("Mixed array flattened:", flattenArray(mixedArray));
 // Test with empty arrays
 console.log("Empty array:", flattenArray([])); // []
 console.log("Nested empty arrays:", flattenArray([[], [1, 2], []])); // [1, 2]
+
+// this is my last comment
