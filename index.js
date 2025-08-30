@@ -90,3 +90,5 @@ const items = [
 const calculateTotalValue = (items) =>
   items.reduce((total, item) => total + item.quantity * item.price, 0);
 console.log("Total Value of Items:", calculateTotalValue(items));
+
+// there is a Back to top button in ui
